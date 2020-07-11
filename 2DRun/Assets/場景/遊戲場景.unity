@@ -9316,6 +9316,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1153200693}
   - component: {fileID: 1153200694}
+  - component: {fileID: 1153200695}
   m_Layer: 0
   m_Name: "\u7DF4\u7FD2\u7528\u7269\u4EF6"
   m_TagString: Untagged
@@ -9344,11 +9345,27 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1153200692}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 146a20f9c9c000848a6acfafb18a0b02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1153200695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1153200692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd0d6be09b51ac7439158a09f03a11d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zombie: {fileID: 1532132330}
+  zombieTran: {fileID: 1532132332}
+  cam: {fileID: 1700498416}
+  ps: {fileID: 624996382}
 --- !u!1001 &1212451652
 PrefabInstance:
   m_ObjectHideFlags: 0

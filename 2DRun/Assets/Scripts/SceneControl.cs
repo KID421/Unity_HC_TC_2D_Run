@@ -21,4 +21,20 @@ public class SceneControl : MonoBehaviour
     {
         SceneManager.LoadScene("遊戲場景"); // 場景管理.載入場景("場景名稱")
     }
+
+    /// <summary>
+    /// 延遲載入場景
+    /// </summary>
+    public void DelayLoadScene()
+    {
+        Invoke("LoadScene", 0.7f);      // 延遲呼叫("方法名稱"，延遲時間)
+    }
+
+    /// <summary>
+    /// 延遲離開遊戲
+    /// </summary>
+    public void DelayQuit()
+    {
+        Invoke("Quit", 0.7f);
+    }
 }
