@@ -9323,7 +9323,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1153200693
 Transform:
   m_ObjectHideFlags: 0
@@ -10332,6 +10332,7 @@ MonoBehaviour:
   soundSlide: {fileID: 8300000, guid: 53df4b7487417c943a0b5ce2fa44135d, type: 3}
   soundHit: {fileID: 8300000, guid: 64fbbf0ebf803a94f97edeb166c3daaf, type: 3}
   dead: 0
+  ani: {fileID: 1532132333}
 --- !u!1 &1537589598
 GameObject:
   m_ObjectHideFlags: 0

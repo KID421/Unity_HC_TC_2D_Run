@@ -40,6 +40,8 @@ public class Player : MonoBehaviour
     public AudioClip soundHit;
     [Header("角色是否死亡"), Tooltip("True 代表死亡，False 代表尚未死亡")]
     public bool dead;
+    [Header("動畫控制器")]
+    public Animator ani;
     #endregion
 
     #region 方法區域
@@ -63,7 +65,11 @@ public class Player : MonoBehaviour
     /// </summary>
     private void Slide()
     {
-        print("滑行");
+        // 布林值 = 輸入.取得按鍵(按鍵代碼列舉.左邊 Ctrl)
+        bool key = Input.GetKey(KeyCode.LeftControl);
+
+        // 動畫控制器代號
+        ani.SetBool("滑行開關", key);
     }
 
     /// <summary>
@@ -97,9 +103,9 @@ public class Player : MonoBehaviour
     // 初始化：
     private void Start()
     {
-        // 呼叫跳躍方法
-        Jump();
+        
     }
+
     // 更新 Update
     // 播放遊戲後一秒執行約 60 次 - 60FPS
     // 移動、監聽玩家鍵盤、滑鼠與觸控
