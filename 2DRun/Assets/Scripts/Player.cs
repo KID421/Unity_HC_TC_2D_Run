@@ -42,6 +42,15 @@ public class Player : MonoBehaviour
     public bool dead;
     [Header("動畫控制器")]
     public Animator ani;
+    [Header("膠囊碰撞器")]
+    public CapsuleCollider2D cc2d;
+    [Header("剛體")]
+    public Rigidbody2D rig;
+
+    /// <summary>
+    /// 是否在地板上
+    /// </summary>
+    public bool isGround;
     #endregion
 
     #region 方法區域
@@ -51,13 +60,45 @@ public class Player : MonoBehaviour
     // 自訂方法 - 不會執行的，需要呼叫
     // API - 功能倉庫
     // 輸出功能 print("字串")
+    
+    /// <summary>
+    /// 移動
+    /// </summary>
+    private void Move()
+    {
+        // 如果 剛體.加速度.大小 小於 10
+        if (rig.velocity.magnitude < 6)
+        {
+            // 剛體.添加推力(二維向量)
+            rig.AddForce(new Vector2(speed, 0));
+        }
+    }
 
     /// <summary>
     /// 角色的跳躍功能：跳躍動畫、播放音效與往上跳
     /// </summary>
     private void Jump()
     {
-        print("跳躍");
+        bool jump = Input.GetKey(KeyCode.Space);
+
+        // 顛倒運算子 !
+        // 作用：將布林值變成相反
+        // !true ----- false
+
+        ani.SetBool("跳躍開關", !isGround);
+
+        // 搬家 Alt + 上、下
+        // 格式化 Ctrl + K D
+
+        // 如果在地板上
+        if (isGround)
+        {
+            if (jump)
+            {
+                isGround = false;                       // 不在地板上
+                rig.AddForce(new Vector2(0, height));   // 剛體.添加推力(二維向量)
+            }
+        }
     }
 
     /// <summary>
@@ -70,6 +111,18 @@ public class Player : MonoBehaviour
 
         // 動畫控制器代號
         ani.SetBool("滑行開關", key);
+
+        if (key)    // 如果 玩家 按下 左邊 Ctrl 就縮小
+        {
+            cc2d.offset = new Vector2(-0.2f, -1.35f);       // 位移
+            cc2d.size = new Vector2(1.8f, 2.15f);           // 尺寸
+        }
+        // 否則 恢復
+        else
+        {
+            cc2d.offset = new Vector2(-0.2f, -0.25f);       // 位移
+            cc2d.size = new Vector2(1.8f, 4.3f);            // 尺寸
+        }
     }
 
     /// <summary>
@@ -103,7 +156,7 @@ public class Player : MonoBehaviour
     // 初始化：
     private void Start()
     {
-        
+
     }
 
     // 更新 Update
@@ -112,6 +165,29 @@ public class Player : MonoBehaviour
     private void Update()
     {
         Slide();
+    }
+
+    /// <summary>
+    /// 固定更新事件：一秒固定執行 50 次 - 只要有剛體就寫在這
+    /// </summary>
+    private void FixedUpdate()
+    {
+        Jump();
+        Move();
+    }
+
+    /// <summary>
+    /// 碰撞事件：碰到物件開始執行一次
+    /// </summary>
+    /// <param name="collision">碰到物件的碰撞資訊</param>
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // 如果 碰到物件 的 名稱 等於 "地板"
+        if (collision.gameObject.name == "地板")
+        {
+            // 是否在地板上 = 是
+            isGround = true;
+        }
     }
     #endregion
 }
